@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -49,6 +50,33 @@
     [self saveContext];
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
+
+    NSString *urlString = url.absoluteString;
+    if ([urlString containsString:@"RedVC"]) {
+        
+        Class class = NSClassFromString(@"NextViewController");
+        
+        UIViewController* vc  = (UIViewController*)[[class alloc]init];
+        vc.view.backgroundColor = [UIColor redColor];
+        UIViewController *rootVC =    self.window.rootViewController;
+        [rootVC presentViewController:vc animated:YES completion:^{
+            
+        }];
+        
+    }else if ([urlString containsString:@"BlueVC"]){
+        
+        Class class = NSClassFromString(@"NextViewController");
+        
+        UIViewController* vc  = (UIViewController*)[[class alloc]init];
+        vc.view.backgroundColor = [UIColor blueColor];
+        UIViewController *rootVC =    self.window.rootViewController;
+        [rootVC presentViewController:vc animated:YES completion:^{
+            
+        }];
+    }
+    return YES;
+}
 
 #pragma mark - Core Data stack
 
